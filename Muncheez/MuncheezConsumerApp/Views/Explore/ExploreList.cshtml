@@ -25,57 +25,18 @@
 }
 <div>
     <!-- Banner -->
-    <section class="banner">
+    <section class="banner" style="background-image: url(https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/_banner/bkg.jpg);">
         <div class="banner-inner">
-            <div class="banner-container">
-                <div class="search-form">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" id="txtSearch" class="form-control" value="@address1">
-                            <div class="input-group-addon"><input type="button" id="btnFind" class="btn btn-green" value="Find Your Feelgood" /></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="app-link">
-                    <li><a href="https://itunes.apple.com/us/app/muncheez/id1309063032?mt=8" target="_blank" title="App Store"><img src="@imagePath/Content/images/app-store.svg" alt="App Store">App Store</a></li>
-                    @*<li><a class="coming-soon--disabled"><img src="~/Content/images/play-store.svg" alt="Google Play">Google Play<img class="coming-soon--image" src="~/Content/images/coming-soon.svg" alt="Coming Soon"></a></li>*@
-                    <li><a class="coming-soon--disabled"><img src="@imagePath/Content/images/play-store.svg" alt="Google Play">Google Play<img class="coming-soon--image" src="~/Content/images/coming-soon.svg" alt="Coming Soon"></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="image-container carousel slide" id="carousel-example-generic">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                @for (int i = 0; i <= sliderImageList.Length - 1; i++)
-                {
-                    if (sliderImageList[i].ToString() != "")
-                    {
-                        <li data-target="#carousel-example-generic" data-slide-to="@countOfImages"></li>
-                        countOfImages++;
-                    }
-                }
-            </ol>
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                @for (int j = 0; j <= sliderImageList.Length - 1; j++)
-                {
-                    if (sliderImageList[j].ToString() != "" && ActiveImage==false)
-                    {
-                        <div class="item active" style="background-image: url('@sliderImageList[j].ToString()');"></div>
-                        ActiveImage = true;
-                        continue;
-                    }
-                    if(ActiveImage==true && sliderImageList[j].ToString() != "")
-                    {
-                        <div class="item" style="background-image: url('@sliderImageList[j].ToString()');"></div>
-                    }
-                }
+            <div class="banner-container" style="max-width: 569px;">
+                <img style="max-width: 100%; height: auto; padding-top: 20px;" src="https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/_banner/branding.png">
+                <a href="https://subversivbjj.com" target="_blank">
+                    <img style="display: block; width: 240px; max-width: 50%; height: auto; margin: 30px auto;" src="https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/_banner/get-tickets-btn.png">
+                </a>
             </div>
         </div>
     </section>
-
     <!-- End Banner -->
+    
     <!-- Main Content -->
     <div class="main-content">
         <div id="dataContainer" class="container">
