@@ -23,25 +23,139 @@
     var address1 = (Session["Address"] != null) ? Session["Address"].ToString() : "";
     List<KeyValuePair<long, string>> lst = TempData["Endsintimelist"] != null ? TempData["Endsintimelist"] as List<KeyValuePair<long, string>> : new List<KeyValuePair<long, string>>();
 }
+
 <div>
     <!-- Banner -->
-    <section class="banner" style="background-image: url(https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/_banner/bkg.jpg);">
+    <section class="banner" style="background-image: url(https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/mhero_01.jpg);">
         <div class="banner-inner">
-            <div class="banner-container" style="max-width: 569px;">
-                <img style="max-width: 100%; height: auto; padding-top: 20px;" src="https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/_banner/branding.png">
-                <a href="https://subversivbjj.com" target="_blank">
-                    <img style="display: block; width: 240px; max-width: 50%; height: auto; margin: 30px auto;" src="https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/_banner/get-tickets-btn.png">
-                </a>
+            <div class="banner-container">
+                <h1>The trusted marketplace for the legal cannabis community.</h1>
+
+                <link rel="stylesheet" href="//d22hhoe037sl7u.cloudfront.net/1.7/css/link_texting_gz.min.css">
+                <style type="text/css">
+                    .linkTextingWidget .linkTextingInput {
+                        font-weight: normal !important;
+                        font-family: 'circular-medium' !important;
+                        -webkit-font-smoothing: antialiased !important;
+                        border:none;
+                        border-radius: 3px;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                    }
+                    .linkTextingWidget .linkTextingButton{
+                        font-weight: normal !important;
+                        font-family: 'circular-medium' !important;
+                        -webkit-font-smoothing: antialiased !important;
+                        border:none;
+                        border-radius: 0 3px 3px 0;
+                        top: 0;
+                        right: -1px;
+                        height:46px;
+                     }
+                    .linkTextingWidget .country-list .country-name, .linkTextingWidget .country-list .dial-code, .linkTextingWidget .country-list .flag {
+                        font-weight: normal !important;
+                        font-family: 'circular-medium' !important;
+                        -webkit-font-smoothing: antialiased !important;
+                     }
+                    .linkTextingWidget .linkTextingError {
+                        font-weight: normal !important;
+                        font-family: 'circular-medium' !important;
+                        -webkit-font-smoothing: antialiased !important;
+                        color: #F24236;
+                    }
+                </style>
+                <div class="promptWrapper">
+                    <div class="linkTextingWidgetWrapper" style="">
+                        <div class="linkTextingWidget" style="">
+                            <div class="promptContent" style=""></div>
+                            <div class="linkTextingInner">
+                                <input type="hidden" class="linkID" value="4ae8ebef-68be-4dd5-b7b1-47ccf184b468">
+                                <div class="linkTextingInputWrapper">
+                                    <input class="linkTextingInput linkTextingInputFlagAdjust" type="tel" id="numberToText_linkTexting">
+                                </div>
+                                <button class="linkTextingButton" type="button" id="sendButton_linkTexting" style="background-color: #00B398;color : #FFFFFF">TEXT ME THE APP</button>
+                                <div class="linkTextingError" id="linkTextingError" style="display:none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    /* Default Country Off, if set to false will use linkTextingDefaultCountry to decide default country, otherwise will determine the visiting user's country via their location */
+                    var linkTextingDefaultCountryOff = true;
+                    /* All Country data is lowercase ISO2 standard http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 */
+                    /* Default Country, if set to "auto" will determine the visiting user's country via their location */
+                    var linkTextingDefaultCountry = "us";
+                    /* If using automatic country detection with https or over 1,000 visits/day go to http://ipinfo.io, get a token, and place it here */
+                    var linkTextingIpinfoToken = "";
+                    /* Preferred Countries in Dropdown */
+                    var linkTextingPreferredCountries = ["us", "ca"];
+                    /* Countries available in dropdown */
+                    var linkTextingOnlyCountries = ["af", "al", "dz", "as", "ad", "ao", "ai", "ag", "ar", "am", "aw", "au", "at", "az", "bs", "bh", "bd", "bb", "by", "be", "bz", "bj", "bm", "bt", "bo", "ba", "bw", "br", "io", "vg", "bn", "bg", "bf", "bi", "kh", "cm", "ca", "cv", "bq", "ky", "cf", "td", "cl", "cn", "co", "km", "cd", "cg", "ck", "cr", "ci", "hr", "cu", "cw", "cy", "cz", "dk", "dj", "dm", "do", "ec", "eg", "sv", "gq", "er", "ee", "et", "fk", "fo", "fj", "fi", "fr", "gf", "pf", "ga", "gm", "ge", "de", "gh", "gi", "gr", "gl", "gd", "gp", "gu", "gt", "gn", "gw", "gy", "ht", "hn", "hk", "hu", "is", "in", "id", "ir", "iq", "ie", "il", "it", "jm", "jp", "jo", "kz", "ke", "ki", "kw", "kg", "la", "lv", "lb", "ls", "lr", "ly", "li", "lt", "lu", "mo", "mk", "mg", "mw", "my", "mv", "ml", "mt", "mh", "mq", "mr", "mu", "mx", "fm", "md", "mc", "mn", "me", "ms", "ma", "mz", "mm", "na", "nr", "np", "nl", "nc", "nz", "ni", "ne", "ng", "nu", "nf", "kp", "mp", "no", "om", "pk", "pw", "ps", "pa", "pg", "py", "pe", "ph", "pl", "pt", "pr", "qa", "re", "ro", "ru", "rw", "bl", "sh", "kn", "lc", "mf", "pm", "vc", "ws", "sm", "st", "sa", "sn", "rs", "sc", "sl", "sg", "sx", "sk", "si", "sb", "so", "za", "kr", "ss", "es", "lk", "sd", "sr", "sz", "se", "ch", "sy", "tw", "tj", "tz", "th", "tl", "tg", "tk", "to", "tt", "tn", "tr", "tm", "tc", "tv", "vi", "ug", "ua", "ae", "gb", "us", "uy", "uz", "vu", "va", "ve", "vn", "wf", "ye", "zm", "zw"];
+                </script>
+                <script type="text/javascript" src="//s3.amazonaws.com/linktexting-cdn/1.7/js/link_texting_gz.min.js"></script>
+                <div class="download-btns">
+                    <a href=https://itunes.apple.com/us/app/muncheez-cannabis-marketplace/id1309063032?mt =8""><img src="https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/download-ios.svg" alt="Apple Store"></a>
+                    <a href="https://play.google.com/store/apps/details?id=com.muncheez&hl=en_US"><img src="https://s3-us-west-1.amazonaws.com/muncheez-production-bucket/download-android.svg" alt="Google Play"></a>
+                </div>
+                <div class="download-btns-2">
+                    <a href="https://itunes.apple.com/us/app/muncheez-cannabis-marketplace/id1309063032?mt=8" target="_blank" title="App Store"><img src="/Content/images/ClaimBusiness/app-store-icon.svg" alt="App Store"></a>
+                    <a href="https://play.google.com/store/apps/details?id=com.muncheez&amp;hl=en_US" target="_blank" title="Google Play"><img src="/Content/images/ClaimBusiness/google-play-icon.svg" alt="Google Play"></a>
+                </div>
             </div>
+
+            @*<div class="banner-container">
+            <div class="search-form">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" id="txtSearch" class="form-control" value="@address1">
+                        <div class="input-group-addon"><input type="button" id="btnFind" class="btn btn-green" value="Find Your Feelgood" /></div>
+                    </div>
+                </div>
+            </div>
+            <ul class="app-link">
+                <li><a href="https://itunes.apple.com/us/app/muncheez/id1309063032?mt=8" target="_blank" title="App Store"><img src="@imagePath/Content/images/app-store.svg" alt="App Store">App Store</a></li>
+                <li><a class="coming-soon--disabled"><img src="@imagePath/Content/images/play-store.svg" alt="Google Play">Google Play<img class="coming-soon--image" src="~/Content/images/coming-soon.svg" alt="Coming Soon"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="image-container carousel slide" id="carousel-example-generic">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            @for (int i = 0; i <= sliderImageList.Length - 1; i++)
+            {
+                if (sliderImageList[i].ToString() != "")
+                {
+                    <li data-target="#carousel-example-generic" data-slide-to="@countOfImages"></li>
+                    countOfImages++;
+                }
+            }
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @for (int j = 0; j <= sliderImageList.Length - 1; j++)
+            {
+                if (sliderImageList[j].ToString() != "" && ActiveImage==false)
+                {
+                    <div class="item active" style="background-image: url('@sliderImageList[j].ToString()');"></div>
+                    ActiveImage = true;
+                    continue;
+                }
+                if(ActiveImage==true && sliderImageList[j].ToString() != "")
+                {
+                    <div class="item" style="background-image: url('@sliderImageList[j].ToString()');"></div>
+                }
+            }
+        </div>*@
         </div>
     </section>
     <!-- End Banner -->
-    
     <!-- Main Content -->
     <div class="main-content">
         <div id="dataContainer" class="container">
             <div id="featureadDeal">
-                @if (Model.featuredDeals > 0)
+            @if (Model.featuredDeals > 0)
             {
             <!-- Featured Deals -->
                     <section class="content-block">
@@ -49,28 +163,29 @@
                             <h5>Featured Deals</h5>
                             @if (Model.GetDealsDataV6.FeaturedDeals.Count > 4)
                             {
-                                <a href="~/Deal/DealList" title="See All">See All <img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
+                                <a href="@Url.Action("DealList","Deal", new { isSeeAllbyExploreList = true})" title="See All Deals">See All Deals<img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
                             }
                         </div>
-                        <div class="row">
-                            @for (int i = 0; i < Model.featuredDeals; i++)
-                            {
-                                var item = Model.GetDealsDataV6.FeaturedDeals[i];
-                                <div class="col-sm-6 col-md-3">
-                                    <a href="#/" onclick="DealDetail(@Model.GetDealsDataV6.FeaturedDeals[i].DealID);">
+                        <div class="thumbnail-slider-outer">
+                            <ul class="thumbnail-slider three-slide clearfix">
+                                @for (int i = 0; i < Model.featuredDeals; i++)
+                                {
+                                    var item = Model.GetDealsDataV6.FeaturedDeals[i];
+                                    var title = Regex.Replace(Model.GetDealsDataV6.FeaturedDeals[i].Title.ToString(), @"[^0-9a-zA-Z]+", "");
+                                    var AccountName = Regex.Replace(@Model.GetDealsDataV6.FeaturedDeals[i].AccountName.ToString(), @"[^0-9a-zA-Z]+", "");
+                                    <li>
                                         <div class="thumbnail">
-                                            <div class="thumbnail-img" style="text-align: center;">
+                                            <a href="#/" class="thumbnail-img" onclick="DealDetail('@AccountName','@title', @Model.GetDealsDataV6.FeaturedDeals[i].DealID);">
                                                 <span class="discount">@item.DealType</span>
-                                                @*<img src='@item.AvtarURL' class="main-img">*@
-                                                @if (item.AvtarURL != null && item.AvtarURL != "")
+                                                @if (item.Image != null && item.Image != "")
                                                 {
-                                                    if (item.AvtarURL.Contains(key))
+                                                    if (item.Image.Contains(key))
                                                     {
-                                                        var tempImage = Regex.Split(item.AvtarURL, ".net");
-                                                        item.AvtarURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
+                                                        var tempImage = Regex.Split(item.Image, ".net");
+                                                        item.Image = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
                                                     }
                                                     <div class="myImage">
-                                                        <span style="display:none">@item.AvtarURL</span>
+                                                        <span style="display:none">@item.Image</span>
                                                         <div class="main-img"></div>
                                                     </div>
                                                 }
@@ -78,43 +193,53 @@
                                                 {
                                                     <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
                                                 }
-                                            </div>
-                                            <div class="caption">
-                                                <div class="caption-table">
-                                                    <div class="caption-cell w-50">
-                                                        @if (item.Image != null)
-                                                        {
-                                                            if (item.Image.Contains(key))
+                                                <div class="caption">
+                                                    <div class="caption-table">
+                                                        <div class="caption-cell w-50">
+                                                            @if (item.AvtarURL != null && item.AvtarURL != "")
                                                             {
-                                                                var tempImage = Regex.Split(item.Image, ".net");
-                                                                item.Image = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                                if (item.AvtarURL.Contains(key))
+                                                                {
+                                                                    var tempImage = Regex.Split(item.AvtarURL, ".net");
+                                                                    item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                                }
+                                                                <img src='@item.AvtarURL' alt="">
                                                             }
-                                                            <img src='@item.Image' alt="">
-                                                        }
-                                                        else
-                                                        {
-                                                            <img src="@imagePath/Content/images/img-placeholder.jpg" alt="">
-                                                        }
+                                                            else
+                                                            {
+                                                                <img src="@imagePath/Content/images/img-placeholder.jpg" alt="">
+                                                            }
+                                                        </div>
+                                                        <div class="caption-cell">
+                                                            <h6>@item.Title</h6>
+                                                            @{var temp = lst.Where(k => k.Key == item.DealID).Select(v => v.Value).FirstOrDefault().ToString(); }
+                                                            <p><span class="green-text">@temp</span><span>@item.ProductType</span></p>
+                                                        </div>
                                                     </div>
-                                                    <div class="caption-cell">
-                                                        <h6>@item.Title</h6>
-                                                        @{var temp = lst.Where(k => k.Key == item.DealID).Select(v => v.Value).FirstOrDefault().ToString(); }
-                                                        <p><span class="green-text">@temp</span><span>@item.ProductType</span></p>
-                                                    </div>
+                                                    <script type="text/javascript">
+                                                         $(".thumbnail-slider").each(function () {
+                                                             $(this).flickity({
+                                                                 groupCells: true,
+                                                                 pageDots: false,
+                                                                 cellAlign: 'left'
+                                                             });
+                                                         });
+                                                    </script>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                </div>
-                                                            }
+                                    </li>
+                                }
+                            </ul>
                         </div>
                     </section>
                     <hr>
             <!-- End Featured Deals -->
-                                                            }
+            }
             </div>
+
             <div id="NearByList">
-                @if (Model.dispensariesNearby > 0)
+           @if (Model.dispensariesNearby > 0)
             {
             <!-- Dispensaries Nearby -->
                     <section class="content-block">
@@ -122,144 +247,142 @@
                             <h5>Storefronts Nearby</h5>
                             <a href="~/NearBy/NearByAccountList" title="Map">Map <img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
                         </div>
-                        <div class="row">
-                            @{int j = 0;}
-                            @for (int i = 0; i < Model.dispensariesNearby; i++)
-                            {
-                                if (Model.dataModelV6.AccountListV6Model.Dispensary.Featured.Count > 0 && Model.dataModelV6.AccountListV6Model.Dispensary.Featured.Count > i)
+
+                        <div class="thumbnail-slider-outer">
+                            <ul class="thumbnail-slider clearfix">
+                                @{int j = 0;}
+                                @for (int i = 0; i < Model.dispensariesNearby; i++)
                                 {
-                                    var item = Model.dataModelV6.AccountListV6Model.Dispensary.Featured[i];
-                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
-                                    <div class="col-sm-6 col-md-3" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
-                                        <div class="thumbnail">
-                                            <a href="#/" class="thumbnail-img">
-                                                @if (item.AvtarURL != null && item.AvtarURL != "")
-                                                {
-                                                    if (item.AvtarURL.Contains(key))
+                                    if (Model.dataModelV6.AccountListV6Model.Dispensary.Featured.Count > 0 && Model.dataModelV6.AccountListV6Model.Dispensary.Featured.Count > i)
+                                    {
+                                        var item = Model.dataModelV6.AccountListV6Model.Dispensary.Featured[i];
+                                        var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
+                                    <li>
+                                    <div class="thumbnail" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
+                                        <a href="#/" class="thumbnail-img">
+                                            @if (item.AvtarURL != null && item.AvtarURL != "")
                                                     {
-                                                        var tempImage = Regex.Split(item.AvtarURL, ".net");
-                                                        item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
-                                                    }
+                                                        if (item.AvtarURL.Contains(key))
+                                                        {
+                                                            var tempImage = Regex.Split(item.AvtarURL, ".net");
+                                                            item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                        }
                                                     <img src='@item.AvtarURL' id="imgTags" class="hotel-logo">
-                                                }
-                                                else
-                                                {
+                                                    }
+                                                    else
+                                                    {
                                                     <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
-                                                }
-                                                @*<img src='@item.AccountPhotoURL' class="main-img">*@
-                                                @if (item.ImageURL != null && item.ImageURL != "")
-                                                {
-                                                    if (item.ImageURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.ImageURL, ".net");
-                                                        item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
                                                     }
-                                                    <div class="myImage">
-                                                        <span style="display:none">@item.ImageURL</span>
-                                                        <div class="main-img"></div>
-                                                    </div>
-                                                }
-                                                else
+
+                                            @if (item.ImageURL != null && item.ImageURL != "")
+                                            {
+                                                if (item.ImageURL.Contains(key))
                                                 {
-                                                    <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
+                                                    var tempImage = Regex.Split(item.ImageURL, ".net");
+                                                    item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
                                                 }
-                                            </a>
-                                            <div class="caption">
-                                                <h6>@item.Name</h6>
-                                                <p><span>@string.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
-                                                <ul class="rating">
-                                                    @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
-                                                    {
+                                                <div class="myImage">
+                                                    <span style="display:none">@item.ImageURL</span>
+                                                    <div class="main-img"></div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                            <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
+                                            }
+                                        </a>
+                                        <div class="caption">
+                                            <h6>@item.Name</h6>
+                                            <p><span>@string.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
+                                            <ul class="rating">
+                                                @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
+                                                        {
                                                         <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
-                                                    }
-                                                    @*else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@Convert.ToDecimal(item.FeelgoodScore.ToString())</li>
-                                                        }*@
-                                                    @*@if (!item.Ratting.Equals(null))
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@String.Format("{0:0.0}", item.Ratting)%</li>
                                                         }
-                                                        else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">0.0%</li>
-                                                        }*@
-                                                </ul>
-                                            </div>
+                                            </ul>
+                                            <script type="text/javascript">
+                                                 $(".thumbnail-slider").each(function () {
+                                                     $(this).flickity({
+                                                         groupCells: true,
+                                                         pageDots: false,
+                                                         cellAlign: 'left'
+                                                     });
+                                                 });
+                                            </script>
                                         </div>
                                     </div>
-                                }
-                                else if (Model.dataModelV6.AccountListV6Model.Dispensary.Normal.Count > 0)
-                                {
-                                    var item = Model.dataModelV6.AccountListV6Model.Dispensary.Normal[j];
-                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
-                                    <div class="col-sm-6 col-md-3" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
-                                        <div class="thumbnail">
+                                </li>
+                                    }
+                                    else if (Model.dataModelV6.AccountListV6Model.Dispensary.Normal.Count > 0)
+                                    {
+                                        var item = Model.dataModelV6.AccountListV6Model.Dispensary.Normal[j];
+                                        var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
+                                        <li>
+                                        <div class="thumbnail" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
                                             <a href="#/" class="thumbnail-img">
                                                 @if (item.AvtarURL != null && item.AvtarURL != "")
-                                                {
-                                                    if (item.AvtarURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.AvtarURL, ".net");
-                                                        item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
-                                                    }
-                                                    <img src='@item.AvtarURL' class="hotel-logo">
-                                                }
-                                                else
-                                                {
-                                                    <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
-                                                }
-                                                @*<img src='@item.AccountPhotoURL' class="main-img">*@
+                                                        {
+                                                            if (item.AvtarURL.Contains(key))
+                                                            {
+                                                                var tempImage = Regex.Split(item.AvtarURL, ".net");
+                                                                item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                            }
+                                                        <img src='@item.AvtarURL' class="hotel-logo">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
+                                                        }
+
                                                 @if (item.ImageURL != null && item.ImageURL != "")
-                                                {
-                                                    if (item.ImageURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.ImageURL, ".net");
-                                                        item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
-                                                    }
-                                                    <div class="myImage">
-                                                        <span style="display:none">@item.ImageURL</span>
-                                                        <div class="main-img"></div>
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
-                                                }
+                                                        {
+                                                            if (item.ImageURL.Contains(key))
+                                                            {
+                                                                var tempImage = Regex.Split(item.ImageURL, ".net");
+                                                                item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
+                                                            }
+                                                        <div class="myImage">
+                                                            <span style="display:none">@item.ImageURL</span>
+                                                            <div class="main-img"></div>
+                                                        </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
+                                                        }
                                             </a>
                                             <div class="caption">
                                                 <h6>@item.Name</h6>
                                                 <p><span>@string.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
                                                 <ul class="rating">
-                                                    @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
-                                                    {
-                                                        <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
-                                                    }
-                                                    @*else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@Convert.ToDecimal(item.FeelgoodScore.ToString())</li>
-                                                        }*@
-                                                    @*@if (!item.Ratting.Equals(null))
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@String.Format("{0:0.0}", item.Ratting)%</li>
-                                                        }
-                                                        else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">0.0%</li>
-                                                        }*@
+                                                        @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
+                                                            {
+                                                                <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
+                                                            }
                                                 </ul>
+                                                <script type="text/javascript">
+                                                     $(".thumbnail-slider").each(function () {
+                                                         $(this).flickity({
+                                                             groupCells: true,
+                                                             pageDots: false,
+                                                             cellAlign: 'left'
+                                                         });
+                                                     });
+                                                </script>
+
                                             </div>
                                         </div>
-                                    </div>
-                                    j++;
+                                    </li>
+                                        j++;
+                                    }
                                 }
-                            }
+                            </ul>
                         </div>
                     </section>
-                    <hr>
+             <hr>
             <!-- End Dispensaries Nearby -->
-                                }
-                @if (Model.deliveryNearby > 0)
+             }
+            @if (Model.deliveryNearby > 0)
             {
             <!-- Delivery Nearby -->
                     <section class="content-block">
@@ -267,299 +390,290 @@
                             <h5>Delivery Nearby</h5>
                             <a href="~/NearBy/NearByAccountList?IsDispensary=false&IsDelivery=true" title="Map">Map <img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
                         </div>
-                        <div class="row">
-                            @{int j = 0;}
-                            @for (int i = 0; i < Model.deliveryNearby; i++)
-                            {
-                                if (Model.dataModelV6.AccountListV6Model.Delivery.Featured.Count > 0 && Model.dataModelV6.AccountListV6Model.Delivery.Featured.Count > i)
+                        <div class="thumbnail-slider-outer">
+                            <ul class="thumbnail-slider clearfix">
+                                @{int j = 0;}
+                                @for (int i = 0; i < Model.deliveryNearby; i++)
                                 {
-                                    var item = Model.dataModelV6.AccountListV6Model.Delivery.Featured[i];
-                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
-                                    <div class="col-sm-6 col-md-3" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
-                                        <div class="thumbnail">
-                                            <a href="#/" class="thumbnail-img">
-                                                @if (item.AvtarURL != null && item.AvtarURL != "")
-                                                {
-                                                    if (item.AvtarURL.Contains(key))
+                                    <li>
+                                        @if (Model.dataModelV6.AccountListV6Model.Delivery.Featured.Count > 0 && Model.dataModelV6.AccountListV6Model.Delivery.Featured.Count > i)
+                                        {
+                                            var item = Model.dataModelV6.AccountListV6Model.Delivery.Featured[i];
+                                            var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
+                                            <div class="thumbnail">
+                                                <a href="#" class="thumbnail-img" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
+                                                    @if (item.AvtarURL != null && item.AvtarURL != "")
                                                     {
-                                                        var tempImage = Regex.Split(item.AvtarURL, ".net");
-                                                        item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
-                                                    }
-                                                    <img src='@item.AvtarURL' class="hotel-logo">
-                                                }
-                                                else
-                                                {
-                                                    <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
-                                                }
-                                                @*<img src='@item.AccountPhotoURL' class="main-img">*@
-                                                @if (item.ImageURL != null && item.ImageURL != "")
-                                                {
-                                                    if (item.ImageURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.ImageURL, ".net");
-                                                        item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
-                                                    }
-                                                    <div class="myImage">
-                                                        <span style="display:none">@item.ImageURL</span>
-                                                        <div class="main-img"></div>
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
-                                                }
-                                            </a>
-                                            <div class="caption">
-                                                <h6>@item.Name</h6>
-                                                <p><span>@String.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
-                                                <ul class="rating">
-                                                    @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
-                                                    {
-                                                        <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
-                                                    }
-                                                    @*else
+                                                        if (item.AvtarURL.Contains(key))
                                                         {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt=""><em>Not Yet Rated</em></li>
-                                                        }*@
-                                                    @*@if (!item.Ratting.Equals(null))
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@String.Format("{0:0.0}", item.Ratting)%</li>
+                                                            var tempImage = Regex.Split(item.AvtarURL, ".net");
+                                                            item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
                                                         }
-                                                        else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">0.0%</li>
-                                                        }*@
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                                else if (Model.dataModelV6.AccountListV6Model.Delivery.Normal.Count > 0)
-                                {
-                                    var item = Model.dataModelV6.AccountListV6Model.Delivery.Normal[j];
-                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
-                                    <div class="col-sm-6 col-md-3" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
-                                        <div class="thumbnail">
-                                            <a href="#/" class="thumbnail-img">
-                                                @if (item.AvtarURL != null && item.AvtarURL != "")
-                                                {
-                                                    if (item.AvtarURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.AvtarURL, ".net");
-                                                        item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                        <img src='@item.AvtarURL' class="hotel-logo">
                                                     }
-                                                    <img src='@item.AvtarURL' class="hotel-logo">
-                                                }
-                                                else
-                                                {
-                                                    <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
-                                                }
-                                                @*<img src='@item.AccountPhotoURL' class="main-img">*@
-                                                @if (item.ImageURL != null && item.ImageURL != "")
-                                                {
-                                                    if (item.ImageURL.Contains(key))
+                                                    else
                                                     {
-                                                        var tempImage = Regex.Split(item.ImageURL, ".net");
-                                                        item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
+                                                        <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
                                                     }
-                                                    <div class="myImage">
-                                                        <span style="display:none">@item.ImageURL</span>
-                                                        <div class="main-img"></div>
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
-                                                }
-                                            </a>
-                                            <div class="caption">
-                                                <h6>@item.Name</h6>
-                                                <p><span>@String.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
-                                                <ul class="rating">
-                                                    @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
+                                                    @if (item.ImageURL != null && item.ImageURL != "")
                                                     {
-                                                        <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
-                                                    }
-                                                    @*else
+                                                        if (item.ImageURL.Contains(key))
                                                         {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt=""><em>Not Yet Rated</em></li>
-                                                        }*@
-                                                    @*@if (!item.Ratting.Equals(null))
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@String.Format("{0:0.0}", item.Ratting)%</li>
+                                                            var tempImage = Regex.Split(item.ImageURL, ".net");
+                                                            item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
                                                         }
-                                                        else
+                                                        <div class="myImage">
+                                                            <span style="display:none">@item.ImageURL</span>
+                                                            <div class="main-img"></div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
+                                                    }
+                                                </a>
+                                                <div class="caption">
+                                                    <h6>@item.Name </h6>
+                                                    <p><span>@String.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
+                                                    <ul class="rating">
+                                                        @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
                                                         {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">0.0%</li>
-                                                        }*@
-                                                </ul>
+                                                            <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
+                                                        }
+                                                    </ul>
+                                                    <script type="text/javascript">
+                                                         $(".thumbnail-slider").each(function () {
+                                                             $(this).flickity({
+                                                                 groupCells: true,
+                                                                 pageDots: false,
+                                                                 cellAlign: 'left'
+                                                             });
+                                                         });
+                                                    </script>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    j++;
+                                        }
+
+                                        else if (Model.dataModelV6.AccountListV6Model.Delivery.Normal.Count > 0)
+                                        {
+                                            var item = Model.dataModelV6.AccountListV6Model.Delivery.Normal[j];
+                                            var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
+                                            <div class="thumbnail">
+                                                <a href="#/" class="thumbnail-img" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
+                                                    @if (item.AvtarURL != null && item.AvtarURL != "")
+                                                    {
+                                                        if (item.AvtarURL.Contains(key))
+                                                        {
+                                                            var tempImage = Regex.Split(item.AvtarURL, ".net");
+                                                            item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                        }
+                                                        <img src='@item.AvtarURL' class="hotel-logo">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
+                                                    }
+                                                    @if (item.ImageURL != null && item.ImageURL != "")
+                                                    {
+                                                        if (item.ImageURL.Contains(key))
+                                                        {
+                                                            var tempImage = Regex.Split(item.ImageURL, ".net");
+                                                            item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
+                                                        }
+                                                        <div class="myImage">
+                                                            <span style="display:none">@item.ImageURL</span>
+                                                            <div class="main-img"></div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
+                                                    }
+                                                </a>
+                                                <div class="caption">
+                                                    <h6>@item.Name </h6>
+                                                    <p><span>@String.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
+                                                    <ul class="rating">
+                                                        @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
+                                                        {
+                                                            <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
+                                                        }
+                                                    </ul>
+                                                    <script type="text/javascript">
+                                                         $(".thumbnail-slider").each(function () {
+                                                             $(this).flickity({
+                                                                 groupCells: true,
+                                                                 pageDots: false,
+                                                                 cellAlign: 'left'
+                                                             });
+                                                         });
+                                                    </script>
+
+                                                </div>
+                                            </div>
+                                            j++;
+                                        }
+                                    </li>
                                 }
-                            }
+                            </ul>
                         </div>
+
                     </section>
-                    <hr>
+             <hr>
             <!-- End Delivery Nearby -->
-                                }
-                @if (Model.doctorsNearby > 0)
+            }
+           @if (Model.doctorsNearby > 0)
             {
-            <!-- Doctors Nearby -->
+              <!-- Doctors Nearby -->
                     <section class="content-block">
                         <div class="content-heading clearfix">
                             <h5>Doctors Nearby</h5>
                             <a href="~/NearBy/NearByAccountList?IsDispensary=false&IsDoctor=true" title="Map">Map <img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
                         </div>
-                        <div class="row">
-                            @{int j = 0;}
-                            @for (int i = 0; i < Model.doctorsNearby; i++)
-                            {
-                                if (Model.dataModelV6.AccountListV6Model.Doctor.Featured.Count > 0 && Model.dataModelV6.AccountListV6Model.Doctor.Featured.Count > i)
-                                {
-                                    var item = Model.dataModelV6.AccountListV6Model.Doctor.Featured[i];
-                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
-                                    <div class="col-sm-6 col-md-3" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
-                                        <div class="thumbnail">
-                                            <a href="#/" class="thumbnail-img">
-                                                @if (item.AvtarURL != null && item.AvtarURL != "")
+                                <div class="thumbnail-slider-outer">
+                                    <ul class="thumbnail-slider clearfix">
+                                        @{int j = 0;}
+                                        @for (int i = 0; i < Model.doctorsNearby; i++)
+                                        {
+                                            <li>
+                                                @if (Model.dataModelV6.AccountListV6Model.Doctor.Featured.Count > 0 && Model.dataModelV6.AccountListV6Model.Doctor.Featured.Count > i)
                                                 {
-                                                    if (item.AvtarURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.AvtarURL, ".net");
-                                                        item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
-                                                    }
-                                                    <img src='@item.AvtarURL' class="hotel-logo">
-                                                }
-                                                else
-                                                {
-                                                    <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
-                                                }
-                                                @*<img src='@item.AccountPhotoURL' class="main-img">*@
-                                                @if (item.ImageURL != null && item.ImageURL != "")
-                                                {
-                                                    if (item.ImageURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.ImageURL, ".net");
-                                                        item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
-                                                    }
-                                                    <div class="myImage">
-                                                        <span style="display:none">@item.ImageURL</span>
-                                                        <div class="main-img"></div>
+                                                    var item = Model.dataModelV6.AccountListV6Model.Doctor.Featured[i];
+                                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
+                                                    <div class="thumbnail">
+                                                        <a href="#/" class="thumbnail-img" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
+                                                            @if (item.AvtarURL != null && item.AvtarURL != "")
+                                                            {
+                                                                if (item.AvtarURL.Contains(key))
+                                                                {
+                                                                    var tempImage = Regex.Split(item.AvtarURL, ".net");
+                                                                    item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                                }
+                                                                <img src='@item.AvtarURL' class="hotel-logo">
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
+                                                            }
+                                                            @if (item.ImageURL != null && item.ImageURL != "")
+                                                            {
+                                                                if (item.ImageURL.Contains(key))
+                                                                {
+                                                                    var tempImage = Regex.Split(item.ImageURL, ".net");
+                                                                    item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
+                                                                }
+                                                                <div class="myImage">
+                                                                    <span style="display:none">@item.ImageURL</span>
+                                                                    <div class="main-img"></div>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
+                                                            }
+                                                        </a>
+                                                        <div class="caption">
+                                                            <h6>@item.Name</h6>
+                                                            <p><span>@string.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
+                                                            <ul class="rating">
+                                                                @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
+                                                                {
+                                                                    <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
+                                                                }
+                                                            </ul>
+                                                            <script type="text/javascript">
+                                                                 $(".thumbnail-slider").each(function () {
+                                                                     $(this).flickity({
+                                                                         groupCells: true,
+                                                                         pageDots: false,
+                                                                         cellAlign: 'left'
+                                                                     });
+                                                                 });
+                                                            </script>
+                                                        </div>
                                                     </div>
                                                 }
-                                                else
+                                                else if (Model.dataModelV6.AccountListV6Model.Doctor.Normal.Count > 0)
                                                 {
-                                                    <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
-                                                }
-                                            </a>
-                                            <div class="caption">
-                                                <h6>@item.Name</h6>
-                                                <p><span>@string.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
-                                                <ul class="rating">
-                                                    @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
-                                                    {
-                                                        <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
-                                                    }
-                                                    @*else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt=""><em>Not Yet Rated</em></li>
-                                                        }*@
-                                                    @*@if (!item.Ratting.Equals(null))
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@String.Format("{0:0.0}", item.Ratting)%</li>
-                                                        }
-                                                        else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">0.0%</li>
-                                                        }*@
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                                else if (Model.dataModelV6.AccountListV6Model.Doctor.Normal.Count > 0)
-                                {
-                                    var item = Model.dataModelV6.AccountListV6Model.Doctor.Normal[j];
-                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
-                                    <div class="col-sm-6 col-md-3" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
-                                        <div class="thumbnail">
-                                            <a href="#/" class="thumbnail-img">
-                                                @if (item.AvtarURL != null && item.AvtarURL != "")
-                                                {
-                                                    if (item.AvtarURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.AvtarURL, ".net");
-                                                        item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
-                                                    }
-                                                    <img src='@item.AvtarURL' class="hotel-logo">
-                                                }
-                                                else
-                                                {
-                                                    <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
-                                                }
-                                                @*<img src='@item.AccountPhotoURL' class="main-img">*@
-                                                @if (item.ImageURL != null && item.ImageURL != "")
-                                                {
-                                                    if (item.ImageURL.Contains(key))
-                                                    {
-                                                        var tempImage = Regex.Split(item.ImageURL, ".net");
-                                                        item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
-                                                    }
-                                                    <div class="myImage">
-                                                        <span style="display:none">@item.ImageURL</span>
-                                                        <div class="main-img"></div>
+                                                    var item = Model.dataModelV6.AccountListV6Model.Doctor.Normal[j];
+                                                    var accountNameAndId = Regex.Replace(item.Name, "[^0-9a-zA-Z]+", "") + '_' + item.AccountID;
+                                                    <div class="thumbnail">
+                                                        <a href="#/" class="thumbnail-img" onclick="BusinessProfile('@accountNameAndId');" style="cursor:pointer;">
+                                                            @if (item.AvtarURL != null && item.AvtarURL != "")
+                                                            {
+                                                                if (item.AvtarURL.Contains(key))
+                                                                {
+                                                                    var tempImage = Regex.Split(item.AvtarURL, ".net");
+                                                                    item.AvtarURL = tempImage[0].ToString() + ".net/" + AvtarSize + tempImage[1].ToString();
+                                                                }
+                                                                <img src='@item.AvtarURL' class="hotel-logo">
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src='@imagePath/Content/images/img-placeholder.jpg' class="hotel-logo">
+                                                            }
+                                                            @if (item.ImageURL != null && item.ImageURL != "")
+                                                            {
+                                                                if (item.ImageURL.Contains(key))
+                                                                {
+                                                                    var tempImage = Regex.Split(item.ImageURL, ".net");
+                                                                    item.ImageURL = tempImage[0].ToString() + ".net/" + ImageSize + tempImage[1].ToString();
+                                                                }
+                                                                <div class="myImage">
+                                                                    <span style="display:none">@item.ImageURL</span>
+                                                                    <div class="main-img"></div>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
+                                                            }
+                                                        </a>
+                                                        <div class="caption">
+                                                            <h6>@item.Name</h6>
+                                                            <p><span>@String.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
+                                                            <ul class="rating">
+                                                                @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
+                                                                {
+                                                                    <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
+                                                                }
+                                                            </ul>
+                                                            <script type="text/javascript">
+                                                                $(".thumbnail-slider").each(function () {
+                                                                    $(this).flickity({
+                                                                        groupCells: true,
+                                                                        pageDots: false,
+                                                                        cellAlign: 'left'
+                                                                    });
+                                                                });
+                                                            </script>
+                                                            
+                                                        </div>
                                                     </div>
+                                                    j++;
                                                 }
-                                                else
-                                                {
-                                                    <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
-                                                }
-                                            </a>
-                                            <div class="caption">
-                                                <h6>@item.Name</h6>
-                                                <p><span>@String.Format("{0:0.00}", item.AccountDistance / 1609.344) mi</span><span>@item.CityName</span></p>
-                                                <ul class="rating">
-                                                    @if (!item.Ratting.Equals(null) && item.Ratting != "" && Convert.ToDouble(item.Ratting.ToString().Replace("%", "")) >= 50)
-                                                    {
-                                                        <li><img src="@imagePath/Content/images/smile-logo.svg" alt="">@item.Ratting.ToString()</li>
-                                                    }
-                                                    @*else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt=""><em>Not Yet Rated</em></li>
-                                                        }*@
-                                                    @*@if (!item.Ratting.Equals(null))
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">@String.Format("{0:0.0}", item.Ratting)%</li>
-                                                        }
-                                                        else
-                                                        {
-                                                            <li><img src="~/Content/images/smile-logo.svg" alt="">0.0%</li>
-                                                        }*@
-                                                </ul>
-                                            </div>
-                                        </div>
+                                            </li>
+                                        }
+                                        </ul>
                                     </div>
-                                    j++;
-                                }
-                            }
-                        </div>
-                    </section>
-                    <hr>
+                        </section>
+             <hr>
             <!-- End Doctors Nearby -->
-                                }
+            }
             </div>
+            
             <div id="brand">
-                @if (Model.Brands > 0)
+           @if (Model.Brands > 0)
             {
             <!-- Trending Brands -->
-                    <section class="content-block" id="Brands">
-                        <div class="content-heading clearfix">
-                            <h5>Trending Brands</h5>
-                            <a href="#/" title="See All" id="lnkBrandsSeeAll" onclick="Seeall('Brands');">See All <img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
-                        </div>
-                        <ul class="thumbnail-list clearfix">
+             <section class="content-block" id="Brands">
+                <div class="content-heading clearfix">
+                    <h5>Trending Brands</h5>
+                    <a href="#/" title="See All" id="lnkBrandsSeeAll" onclick="Seeall('Brands');">See All <img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
+                </div>
+
+                <div class="thumbnail-slider-outer">
+                    <ul class="thumbnail-slider clearfix">
                             @for (int i = 0; i < Model.Brands; i++)
                             {
                                 <li onclick="BrandDetail(@Model.brands.Brands[i].AccountID)">
@@ -578,7 +692,6 @@
                                             {
                                                 <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
                                             }
-                                            @*<img src="@Model.dataModel.Brands.Brands[i].ImageURL" class="main-img">*@
 
                                         </a>
                                         <div class="caption">
@@ -592,18 +705,29 @@
                                             {
                                                 <p><span class="purple-text">@Model.brands.Brands[i].AccountCategory</span></p>
                                             }
+                                            <script type="text/javascript">
+                                                $(".thumbnail-slider").each(function () {
+                                                    $(this).flickity({
+                                                        groupCells: true,
+                                                        pageDots: false,
+                                                        cellAlign: 'left'
+                                                    });
+                                                });
+                                            </script>
                                         </div>
                                     </div>
                                 </li>
                             }
                         </ul>
-                    </section>
-                    <hr>
+                    </div>
+            </section>
+            <hr>
             <!-- End Trending Brands -->
-                }
+            }
             </div>
+
             <div id="strain">
-                @if (Model.Strains > 0)
+           @if (Model.Strains > 0)
             {
             <!-- Top Strains -->
                     <section class="content-block" id="Strains">
@@ -611,7 +735,7 @@
                             <h5>Top Strains</h5>
                             <a href="#/" title="See All" id="lnkStrainsSeeAll" onclick="Seeall('Strains');">See All <img src="@imagePath/Content/images/right-arrow.svg" alt=""></a>
                         </div>
-                        <ul class="thumbnail-list clearfix">
+                        <ul class="thumbnail-list strain-list clearfix">
                             @for (int i = 0; i < Model.Strains; i++)
                             {
                                 <li onclick="StrainsDetail(@Model.strains.Strains[i].StrainID)">
@@ -630,7 +754,6 @@
                                             {
                                                 <div style="background-image:url('@imagePath/Content/images/img-placeholder.jpg')" class="main-img"></div>
                                             }
-                                            @*<img src="@Model.dataModel.strains.Strains[i].MuncheezImage" class="main-img">*@
 
                                         </a>
                                         <div class="caption">
@@ -642,63 +765,78 @@
                             }
                         </ul>
                     </section>
-                    <hr>
+            <hr>
             <!-- End Top Strains -->
-                }
+            }
             </div>
+
             <!-- Culture -->
             <section class="content-block">
                 <div class="content-heading clearfix">
                     <h5>Latest from Culture</h5>
-                    @*<a href="#" title="See All">See All<img src="~/Content/images/right-arrow.svg" alt=""></a>*@
+                    <a href="@Url.Action("CultureList","Culture")" title="See All" id="lnkCultureSeeAll">See All<img src="~/Content/images/right-arrow.svg" alt=""></a>
                 </div>
-                @if (Model.GostPostModel != null)
-                {
-                    <div class="thumbnail culture" onclick="openNewWindows('@Model.GostPostModel.url');">
-                        <a href="#/" class="thumbnail-img">
-                            @if (Model.GostPostModel.feature_image == null)
+                <div class="thumbnail-slider-outer">
+                    <ul class="thumbnail-slider two-slide clearfix">
+                            @if (Model.GostPostsModel != null)
                             {
-                                <div class="main-img" style="background-image:url('@imagePath/Content/images/img-placeholder-large.jpg')"></div>
-                                @*<img src="~/Content/images/img-placeholder-large.jpg" class="main-img" style="min-width:100px;max-width:100%!important;">*@
+                               for (int i = 0; i < Model.GostPostsModel.Count(); i++)
+                                {
+                                <li>
+                                <div class="thumbnail" onclick="openNewWindows('@Model.GostPostsModel[i].url');">
+                                    <a href="#" class="thumbnail-img">
+                                        @if (Model.GostPostsModel[i].feature_image == null)
+                                        {
+                                            <div class="main-img" style="background-image:url('@imagePath/Content/images/img-placeholder-large.jpg')"></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="main-img" style="background-image:url('@Model.GostPostsModel[i].feature_image')"></div>
+                                        }
+                                    </a>
+                                    <div class="caption">
+                                        <h6 class="green-text">@Model.GostPostsModel[i].username</h6>
+                                        <h2><a href="#/">@Model.GostPostsModel[i].title</a></h2>
+
+                                    </div>
+                                </div>
+                                </li>
+                                }
                             }
                             else
                             {
-                                <div class="main-img" style="background-image:url('@Model.GostPostModel.feature_image')"></div>
-                                @*<img src="@Model.GostPostModel.feature_image" class="main-img" style="min-width:100px;max-width:100%!important;">*@
+                                <li>
+                                    <div class="caption">
+                                        <h6 class="green-text">@Model.GostPostsModel[0].username</h6>
+                                        <h2><a href="#/">@Model.GostPostsModel[0].title</a></h2>
+                                        
+                                    </div>
+                                </li>
                             }
-                        </a>
-                        <div class="caption">
-                            <h6 class="green-text">@Model.GostPostModel.username</h6>
-                            <h2><a href="#/">@Model.GostPostModel.title</a></h2>
-                            @*<p>@Model.GostPostModel.slug</p> Removed as per trello comment by David*@
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="thumbnail culture">
-                        <a href="#/" class="thumbnail-img">
-                            <img src="@imagePath/Content/images/img-placeholder-large.jpg" class="main-img" style="min-width:100px;max-width:100%!important;">
-                        </a>
-                        <div class="caption">
-                            <h6 class="green-text"></h6>
-                            <h2><a href="#/">Title</a></h2>
-                            <p></p>
-                        </div>
-                    </div>
-                }
+                    </ul>
+                    <script type="text/javascript">
+                        $(".thumbnail-slider").each(function () {
+                            $(this).flickity({
+                                groupCells: true,
+                                pageDots: false,
+                                cellAlign: 'left'
+                            });
+                        });
+                    </script>
+                </div>
             </section>
             <!-- End Culture -->
         </div>
     </div>
 </div>
+
+<script src="~/Content/js/flickity.pkgd.min.js"></script>
+
 <script type="text/javascript">
     var Latitude, Longitude, city, state, placeChanged, address, currentLatitude, currentLongitude, currentAddress;
     $(document).ready(function () {
         if ('@System.Web.HttpContext.Current.Session["Address"]' == '' || '@System.Web.HttpContext.Current.Session["Address"]' == null) {
             $.getJSON("https://ipapi.co/jsonp?callback=?", function (data) {
-                // console.log(JSON.stringify(data));
-                //var data1=JSON.stringify(data);
                 currentLatitude = data.latitude;
                 currentLongitude = data.longitude;
                 currentAddress = data.city + ',' + data.region + ',' + data.country_name;
@@ -837,8 +975,6 @@
 
     //=======================================================================================================================================================
 
-
-
     //search click...
     $('#btnFind').on('click', function () {
         if (placeChanged == 1) {
@@ -850,8 +986,6 @@
 
             //get explore list..
             ExploreListForPlaces();
-
-
         }
     });
 
@@ -956,7 +1090,7 @@
 
         $.ajax({
             type: "GET",
-            url: '@Url.Action("ExploreStrainList", "Explore")',
+            url: '@Url.Action("ExploreStrainListDetails", "Explore")',
             contentType: 'application/json;charset=utf-8',
             dataType: 'html',
             async: true,
@@ -966,7 +1100,6 @@
             error: function () {
             }
         });
-
     }
 
     //get current location of browser..
@@ -1021,69 +1154,33 @@
         geocoder.geocode({ 'latLng': latlng }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
-
                     $("#txtSearchPlaces").val(results[0].formatted_address);
                     $("#txtSearch").val(results[0].formatted_address);
                     //manage lat-long & address values in session
                     SetSessionValues($("#txtSearch").val(), latlng.lat, latlng.lng, '@Url.Action("SetSessionValues", "Explore")');
                     ExploreListForPlaces();
-                    //    }
-                    //}
                 }
             }
         });
     }
 
-    ////Redirect to Deal-Detail page when click on Featured deal
-    function DealDetail(Id) {
-        window.location.href = '@Url.Action("DealDetail", "Deal")' + "?DealID=" + Id;
-    }
-
-
     function openNewWindows(URL) {
-        //window.open(URL);
-        window.location.href = '@Url.Action("CultureList", "Culture")';
+        window.open(URL);
     }
 
-    ////see all Brands and Strains
+    //see all Brands and Strains
     function Seeall(seeall) {
         if (seeall == "Brands") {
-            $.ajax({
-                type: "GET",
-                url: '@Url.Action("ExploreBrandList", "Explore")',
-                data: { IseeAll: seeall },
-                contentType: 'application/json;charset=utf-8',
-                dataType: 'html',
-                success: function (data) {
-                    $('#brand').html($(data).find('#brand').html());
-                    //image resize
-                    var windowWidth = $(window).width();
-                    var windowHeight = $(window).height();
-                    var myImageArray = $('.myImage');
-                    if (windowWidth > 1199) {
-                        dimention = "253x145";
-                    } else if (windowWidth <= 1199 && windowWidth >= 991) {
-                        dimention = "215x145";
-                    }
-                    else if (windowWidth < 991 && windowWidth > 767) {
-                        dimention = "343x145";
-                    }
-                    else if (windowWidth <= 767) {
-                        dimention = (Number(windowWidth) - 42) + "x145";
-                    }
-                    myImageArray.each(function () {
-                        var text = $(this).find('span').text().replace('ImageSize', dimention);
-                        $(this).find('div').css({ "background-image": 'url(' + text.split(' ').join('%20') + ')', "background-repeat": "no-repeat" });
-                    });
-                },
-                error: function () {
-                }
-            });
+            var brandIndexUrl = '@Url.Action("ExploreBrandIndexList", "Explore")';
+            window.location.href = brandIndexUrl;
         }
         else if (seeall == "Strains") {
+            @*var strainUrl = '@Url.Action("ExploreStrainList", "Explore")';
+            window.location.href = strainUrl;*@
+
             $.ajax({
                 type: "GET",
-                url: '@Url.Action("ExploreStrainList", "Explore")',
+                url: '@Url.Action("ExploreStrainListDetails", "Explore")',
                 data: { IseeAll: seeall },
                 contentType: 'application/json;charset=utf-8',
                 dataType: 'html',
