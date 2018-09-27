@@ -1,0 +1,833 @@
+@using Muncheez.BDModel.Common;
+
+@{
+    var address = (Session["Address"] != null) ? Session["Address"].ToString() : "";
+    var UserName = (Session["UserName"] != null) ? Session["UserName"].ToString() : "";
+    var Email = (Session["Email"] != null) ? Session["Email"].ToString() : "";
+    int itemCount = (Session["ItemCount"] != null) ? Convert.ToInt32(Session["ItemCount"]) : 0;
+    var ProfilePicture = (Session["ProfilePicture"] != null) ? Session["ProfilePicture"].ToString() : "";
+    var mapKey = System.Configuration.ConfigurationManager.AppSettings["GoogleAPIKey"].ToString();
+    var fullStoryKey = System.Configuration.ConfigurationManager.AppSettings["FullStoryKey"].ToString();
+    var mixpanelKey = System.Configuration.ConfigurationManager.AppSettings["MixPanelKey"].ToString();
+    var imagePath1 = string.Format("{0}://{1}{2}{3}", Request.Url.Scheme, Request.Url.Host, (Request.Url.Port == 80 ? "" : ":" + Request.Url.Port), (Request.ApplicationPath == "/" ? "" : Request.ApplicationPath));
+}
+<style>
+    .ui-state-active,
+    .ui-widget-content .ui-state-active,
+    .ui-widget-header .ui-state-active,
+    .ui-autocomplete, .ui-autocomplete:hover,
+    .ui-menu-item, .ui-menu-item:hover,
+    .ui-menu-item a, .ui-menu-item a:hover,
+    .ui-widget-content .ui-state-focus,
+    .ui-widget-header .ui-state-focus,
+    .ui-widget-content .ui-state-hover,
+    .ui-widget-header .ui-state-hover,
+    .ui-menu .ui-menu-item a.ui-state-focus,
+    .ui-menu .ui-menu-item a.ui-state-active,
+    .ui-menu .ui-menu-item a {
+        background: #ffffff none no-repeat;
+        padding:0;
+        margin:0;
+        display:block;
+        border:0;
+        border-collapse: collapse;
+    }
+
+    .ui-widget-content {
+        border:unset;
+        background:unset;
+        color:unset;
+    }
+
+    .ui-autocomplete {
+        max-height: 200px;
+        overflow-y: auto;
+        /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+        /* add padding to account for vertical scrollbar */
+        padding-right: 20px;
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
+    <link href="~/Content/css/bootstrap-select.css?v=1" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css?v=1" rel="stylesheet" />
+    <link href="~/Content/css/dev-style.css?v=1" rel="stylesheet" />
+    <link href="~/Content/css/style.css?v=1" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui.min.css?v=1" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js?v=1"></script>
+    <script src="~/Content/js/jquery-ui.js?v=1"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js?v=1"></script>
+    <script src="~/Scripts/bootstrap.min.js?v=1"></script>
+    <script src="~/Content/js/fastclick.min.js?v=1"></script>
+    <script src="~/Content/js/bootstrap-select.js?v=1"></script>
+    <script src="~/Content/js/jquery.nicescroll.min.js?v=1"></script>
+    <script src="~/Content/js/masonry.pkgd.min.js?v=1"></script>
+    @*<script src="~/Content/js/nanobar.min.js?v=1"></script>*@
+    <script src="~/Content/js/nprogress.js?v=1"></script>
+    <script src="~/Content/js/flickity.pkgd.min.js?v=1"></script>
+
+    <script src="~/Content/js/general.js?v=1"></script>
+
+    @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGVNyJWu643stoz4YdtwMJ4zQYqimkDi4&libraries=places,geometry"></script>*@
+    <script type='text/javascript' src='@System.Configuration.ConfigurationManager.AppSettings["GoogleAPIurl"].ToString()'></script>
+    <script src="~/Content/js/Common.js?v=1"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src='https://www.googletagmanager.com/gtag/js?id="@System.Configuration.ConfigurationManager.AppSettings["GOOGLE_ANALYTICS"].ToString()"'></script>
+    <link href="~/Content/css/nprogress.css" rel="stylesheet" />
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', '@System.Configuration.ConfigurationManager.AppSettings["GOOGLE_ANALYTICS"].ToString()');
+    </script>
+    <script>
+        var WebURL = "@System.Configuration.ConfigurationManager.AppSettings["Host"].ToString()";
+    </script>
+    @*<script>
+                var GOOGLE_MAP_KEY =  '@System.Configuration.ConfigurationManager.AppSettings["key"].ToString()';
+
+        function loadScript() {
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = 'https://maps.googleapis.com/maps/api/js?' +
+              '&key=' + GOOGLE_MAP_KEY +'&callback=initialize'; //& needed
+          document.body.appendChild(script);
+        }
+
+        window.onload = loadScript;
+            </script>*@
+
+    <!-- start Mixpanel -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            (function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+        0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+                for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+            mixpanel.init('@mixpanelKey');
+
+            mixpanel.track('@UserName');
+        });
+    </script>
+    <!-- end Mixpanel -->
+
+    @RenderSection("scripts", false)
+    <title>Muncheez</title>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Start Header -->
+        <header class="header clearfix">
+            <div class="header-left">
+                <a href="#" class="toggle-sidebar">
+                    <i class="menu-icon">
+                        <span class="line1"></span>
+                        <span class="line2"></span>
+                        <span class="line3"></span>
+                    </i>
+                </a>
+                <!-- Logo -->
+                <a href="~/Explore/ExploreList" title="Muncheez" class="logo">
+                    <img src="@imagePath1/Content/images/muncheez-logo.svg" alt="Muncheez" class="hidden-xs">
+                    <img src="@imagePath1/Content/images/icon-logo.png" alt="Muncheez" class="visible-xs">
+                </a>
+                <!-- End Logo -->
+                <!-- Main Navigation -->
+                <nav class="main-navigation">
+                    <!-- Search Form -->
+                    <form class="form-inline">
+                        <div class="form-group w-200">
+                            @*<select class="form-control selectpicker location-select">
+                                    <option>Venice, CA</option>
+                                    <option>Location 2</option>
+                                    <option>Location 3</option>
+                                    <option>Location 4</option>
+                                    <option>Location 5</option>
+                                </select>*@
+                            <input type="text" id="txtSearchPlaces" value="@address" class="form-control location-select  googlesearch needsclick" placeholder="Enter a location" autocomplete="on">                            
+                            @*<div class="input-group location-select-group">
+                                <input type="text" id="txtSearchPlaces" value="@address" class="form-control location-select  googlesearch needsclick" placeholder="Enter a location" autocomplete="on">
+                                <div class="input-group-addon"><button class="current-location-btn"><img src="@imagePath1/Content/images/current-location.svg" alt="" /></button></div>
+                            </div>*@
+                        </div>
+                        @* auto complete section *@
+                        <div class="form-group w-200">
+                            <input id="txtSearchText" type="text" class="form-control search-input" placeholder="Search">
+                        </div>
+                        <button class="hidden"></button>
+                    </form>
+                    <!-- End Search Form -->
+                    <ul class="main-nav clearfix">
+                        <li id="lnk_Explore">
+                            @Html.ActionLink("Explore", "ExploreList", "Explore")
+                        </li>
+                        <li id="lnk_Nearby">
+                            @Html.ActionLink("Nearby", "NearByAccountList", "NearBy")
+                        </li>
+                        <li id="lnk_deal">
+                            @Html.ActionLink("Deals", "DealList", "Deal", new { isSeeAllbyExploreList = false}, null)
+                        </li>
+                        <li id="lnk_Culture">
+                            @Html.ActionLink("Culture", "CultureList", "Culture")
+                        </li>
+                    </ul>
+
+                </nav>
+                <!-- End Main Navigation -->
+            </div>
+
+
+
+            @if (UserName == null || UserName == "")
+            {
+                <div class="header-right">
+                    <a href="~/Login/Login" title="Sign In" class="btn btn-default">Sign In</a>
+                    <a href="~/Login/SignUp" title="Sign Up" class="btn btn-primary">Sign Up</a>
+                    @*<a href="https://business.muncheez.com/business" target="_blank" title="For Business" class="btn btn-secondary">For Business</a>*@
+                    <a href="@Url.Action("Index","Business")"  title="For Business" class="btn btn-secondary">For Business</a>
+                    @*<button class="btn btn-secondary">For Business</button>*@
+                </div>
+            }
+            else
+            {
+                <div class="header-right">
+                    <a href="#" onclick="CartDetail('@Session["UserId"]');" title="cart" class="cart-btn">
+                        <img src="~/Content/images/cart-icon.png" alt="">
+                        @if (itemCount > 0)
+                        {
+                            <i id="cartItemCount">@itemCount</i>
+                        }
+                    </a>
+                    @*<a href="https://muncheez.com/business" target="_blank" title="For Business" class="btn btn-secondary">For Business</a>*@
+                    <a href="@Url.Action("Index","Business")"  title="For Business" class="btn btn-secondary">For Business</a>
+                    <div class="dropdown user-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span id="ID_@Session["UserId"]">@UserName</span>
+                            @if (ProfilePicture != null && ProfilePicture != "")
+                            {
+                                <img src="@ProfilePicture" alt="" class="user-img">
+                            }
+                            else
+                            {
+                                <img src="@imagePath1/Content/images/profile-img-placeholder.jpg" alt="" class="user-img">
+                            }
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="~/Account/UserProfile">Profile</a></li>
+                            <li><a href="~/Account/ChangePassword">Change Password</a></li>
+                            <li><a href="~/Login/Logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </header>
+        <div class="navigation-overlay"></div>
+        <!-- End Header -->
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+    <!-- Start Footer -->
+    <footer class="footer" id="FooterOrg">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4">
+                                <h6>Muncheez</h6>
+                                <ul class="footer-links">
+                                    <li><a href="https://business.muncheez.com/" title="About">About</a></li>
+                                    <li><a href="https://business.muncheez.com/business" title="About">Business</a></li>
+                                    @*<li><a href="#" title="Press">Press</a></li>*@
+                                    @*<li><a href="#" title="Jobs">Jobs</a></li>*@
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-sm-4">
+                                <h6>Support</h6>
+                                <ul class="footer-links">
+                                    @*<li><a href="#" title="FAQ">FAQ</a></li>*@
+                                    <li><a href="https://business.muncheez.com/contact" title="Contact">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-sm-4">
+                                <h6>Legal</h6>
+                                <ul class="footer-links">
+                                    <li><a href="https://business.muncheez.com/privacy" title="Privacy">Privacy</a></li>
+                                    <li><a href="https://business.muncheez.com/terms" title="Terms">Terms</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <h6>Connect</h6>
+                        <ul class="footer-links">
+                            <li><a href="https://www.instagram.com/muncheezapp/" title="Instagram">Instagram</a></li>
+                            @*<li><a href="#" title="Facebook">Facebook</a></li>
+                                <li><a href="#" title="Twitter">Twitter</a></li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom clearfix">
+                <p class="copyright">Copyright &copy; 2018 &middot; A Digital Tower Co.</p>
+                <a href="#" title="Muncheez" class="footer-logo"><img src="@imagePath1/Content/images/footer-logo.svg" alt="Muncheez"></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Modal start -->
+    <div id="myModal" class="modal fade ageCheckModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content start-->
+            <div class="modal-content rounded">
+                <div class="modal-body">
+                    <div>
+                        <div class="body text-center">
+                            <form>
+                                <img src="@imagePath1/Content/images/logo-icon.png" alt="" class="logo-icon">
+                                <h4>Adults only (21+)</h4>
+                                <div class="form-group">
+                                    <button type="button" id="btnYes" class="btn btn-green btn-lg full-width" data-dismiss="modal" aria-hidden="true">I’m over 21 years old</button>
+                                </div>
+                                @*<a href="https://www.google.com/search?q=babies+eating+pizza&safe=off&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjzwL_h563aAhUmh-AKHTCsDZQQ_AUICigB&biw=1440&bih=900" title="I am underage" aria-hidden="true">I am underage</a>*@
+                                <a href="#underageModal" title="I am underage" data-toggle="modal">I’m <u>underage</u></a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal content end-->
+        </div>
+    </div>
+    
+
+    <div class="modal fade" id="underageModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title" id="ModalLabel">Alert</h4>
+                </div>
+                <div class="modal-body" id="underageModalContent">
+                    <p style="text-align:center;">You must be 21 years of age to enter this site.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="$('#underageModal').modal('hide');">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @RenderSection("scripts", false)
+
+    <script type="text/javascript">
+        $(window).load(function () {
+            if ('@ViewBag.Title' != "Explore") {
+                NProgress.done();
+            }
+        });
+
+        window.onbeforeunload = function () {
+            NProgress.start();
+            return null;
+        };
+
+        $(document).ajaxStart(function () {
+            NProgress.start();
+        }).ajaxStop(function () {
+            NProgress.done();
+        });
+
+        //Ask users for age greater than 21...
+        $("#btnYes").on('click', function () {
+            //set age flag to true...
+            SetAgeFlag('@Url.Action("SetAgeFlag", "Explore")');
+            /* unblur on close */
+            $('.ageCheckModal').on('hide.bs.modal', function () {
+                $('.wrapper').removeClass('blur');
+            })
+            $("#myModal").modal('hide');
+
+            //---------------------------------------------------------------------------------
+            if ("@ViewBag.Title" == "Explore") {
+                ExploreListLoad('True');
+            }
+            //---------------------------------------------------------------------------------
+
+            //if location default pop up is ignored then get default location & load data...
+            @*if (!('@Session["Address"]' != null && '@Session["Address"]' != '')) {
+                $("#txtSearchPlaces").val("Los Angeles, CA, USA");
+                $("#txtSearch").val("Los Angeles, CA, USA");
+                FindDefaultAddressDetail('@Url.Action("FindAddressDetail", "Explore")');
+                ExploreListForPlaces();
+            }*@
+        });
+        $(document).ready(function () {
+            if ('@System.Web.HttpContext.Current.Session["Is21"]' == 'False') {
+                $('#myModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                /* blur on modal open*/
+                $(".ageCheckModal").on('show.bs.modal', function () {
+                    //$('.wrapper').addClass('blur');
+                });
+                $("#myModal").modal('show');
+            }
+            $('#nodealcity').text($('#txtSearchPlaces').val());
+        });
+
+        function SetAgeFlag(url) {
+            $.ajax({
+                type: "GET",
+                traditional: true,
+                url: url,
+                //data: { Is21:true },
+                async: false,
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'html',
+                success: function () {
+                },
+                error: function () {
+                }
+            });
+
+        }
+        if ("@ViewBag.Title" == "NearByAccountList" || "@ViewBag.Title" == "NearByBrandList") {
+            $("#FooterOrg").hide();
+        }
+
+        //============================================================================================================================================
+        //Auto complete for regions...
+        var Latitude, Longitude, Address, exploreUrl = '@Url.Action("SetSessionValues", "Explore")';
+        var getRegionsUrl = '@Url.Action("GetRegionsSearchByName", "Explore")';
+        $(function () {
+            $("[id$=txtSearchPlaces]").catcomplete({
+                delay: 600,
+                source: function (request, response) {
+                    $.ajax({
+                        url: getRegionsUrl,
+                        data: "{ 'SearchText': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            //alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            //alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    if (i.item.category == "Regions") {
+                        //get latitude longitude from selected region..
+                        Latitude = i.item.Latitude;
+                        Longitude = i.item.Longitude;
+                        Address = i.item.label;
+                        SetSessionValues(Address, Latitude, Longitude, exploreUrl.toString());
+                        SearchPlaces();
+                    }
+                    else {
+                        GetLatLongByAddress(i.item.label, '@Url.Action("GetLatLongByAddress", "Explore")');
+                        SearchPlaces();
+                        //place_changed (google location autocomplete)
+                    }
+                    $('#txtSearch').val(i.item.label);
+                },
+                minLength: 1
+            });
+        });
+        //============================================================================================================================================
+
+
+
+        // Search location..
+        var address = '';
+        var Latitude, Longitude, state, city;
+        @*google.maps.event.addDomListener(window, 'load', function () {
+            var options = {
+                types: ['geocode'],
+                componentRestrictions: { country: "us" }
+            };
+            //Get auto complete using google API..
+            var placeStart = new google.maps.places.Autocomplete(document.getElementById('txtSearchPlaces'), options);
+            google.maps.event.addListener(placeStart, 'place_changed', function () {
+                var place = placeStart.getPlace();
+                address = place.formatted_address;
+                lat1 = place.geometry.location.lat();
+                lon1 = place.geometry.location.lng();
+                Latitude = parseFloat(lat1);
+                Longitude = parseFloat(lon1);
+                for (var i = 0; i < place.address_components.length; i++) {
+                    if (place.address_components[i].types[0] === "administrative_area_level_1")
+                    { state = place.address_components[i].short_name }
+                    //if (place.address_components[i].types[0] === "administrative_area_level_2")
+                    //{ city = place.address_components[i].short_name }
+                }
+                city = place.vicinity;
+                //manage session values on search change..
+                SetSessionValues(address, lat1, lon1, city, state, '@Url.Action("SetSessionValues", "Explore")');
+                //Get list of explore by searched location..
+                SearchPlaces();
+            });
+        });*@
+        google.maps.event.addDomListener(document.getElementById('txtSearchPlaces'), 'keydown', function (event) {
+            //$('.pac-item').addClass('needsclick');
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            }
+        });
+
+        google.maps.event.addDomListener(document.getElementById('txtSearchText'), 'keydown', function (event) {
+            //$('.pac-item').addClass('needsclick');
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            }
+        });
+
+        function SearchPlaces() {
+            if ("@ViewBag.Title" == "Explore") {
+                $('#txtSearch').val($('#txtSearchPlaces').val());
+                //if page is expore list then change searchbox same as header search location..
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ExploreListFeaturedDeal", "Explore")',
+                    contentType: 'application/json;charset=utf-8',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        $('#featureadDeal').html($(data).find('#featureadDeal').html());
+                        //image resize
+                        var windowWidth = $(window).width();
+                        var windowHeight = $(window).height();
+                        var myImageArray = $('.myImage');
+                        if (windowWidth > 1199) {
+                            dimention = "253x145";
+                        } else if (windowWidth <= 1199 && windowWidth >= 991) {
+                            dimention = "215x145";
+                        }
+                        else if (windowWidth < 991 && windowWidth > 767) {
+                            dimention = "343x145";
+                        }
+                        else if (windowWidth <= 767) {
+                            dimention = (Number(windowWidth) - 42) + "x145";
+                        }
+                        myImageArray.each(function () {
+                            var text = $(this).find('span').text().replace('ImageSize', dimention);
+                            $(this).find('div').css({ "background-image": 'url(' + text.split(' ').join('%20') + ')', "background-repeat": "no-repeat" });
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ExploreNearByList", "Explore")',
+                    contentType: 'application/json;charset=utf-8',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        $('#NearByList').html($(data).find('#NearByList').html());
+                        //image resize
+                        var windowWidth = $(window).width();
+                        var windowHeight = $(window).height();
+                        var myImageArray = $('.myImage');
+                        if (windowWidth > 1199) {
+                            dimention = "253x145";
+                        } else if (windowWidth <= 1199 && windowWidth >= 991) {
+                            dimention = "215x145";
+                        }
+                        else if (windowWidth < 991 && windowWidth > 767) {
+                            dimention = "343x145";
+                        }
+                        else if (windowWidth <= 767) {
+                            dimention = (Number(windowWidth) - 42) + "x145";
+                        }
+                        myImageArray.each(function () {
+                            var text = $(this).find('span').text().replace('ImageSize', dimention);
+                            $(this).find('div').css({ "background-image": 'url(' + text.split(' ').join('%20') + ')', "background-repeat": "no-repeat" });
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ExploreBrandList", "Explore")',
+                    contentType: 'application/json;charset=utf-8',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        $('#brand').html($(data).find('#brand').html());
+                        //image resize
+                        var windowWidth = $(window).width();
+                        var windowHeight = $(window).height();
+                        var myImageArray = $('.myImage');
+                        if (windowWidth > 1199) {
+                            dimention = "253x145";
+                        } else if (windowWidth <= 1199 && windowWidth >= 991) {
+                            dimention = "215x145";
+                        }
+                        else if (windowWidth < 991 && windowWidth > 767) {
+                            dimention = "343x145";
+                        }
+                        else if (windowWidth <= 767) {
+                            dimention = (Number(windowWidth) - 42) + "x145";
+                        }
+                        myImageArray.each(function () {
+                            var text = $(this).find('span').text().replace('ImageSize', dimention);
+                            $(this).find('div').css({ "background-image": 'url(' + text.split(' ').join('%20') + ')', "background-repeat": "no-repeat" });
+                        });
+                    },
+                    error: function () {
+                    }
+                });
+
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ExploreStrainListDetails", "Explore")',
+                    contentType: 'application/json;charset=utf-8',
+                    dataType: 'html',
+                    async: true,
+                    success: function (data) {
+                        $('#strain').html($(data).find('#strain').html());
+                    },
+                    error: function () {
+                    }
+                });
+            }
+
+            if ("@ViewBag.Title" == "NearByAccountList") {
+                window.location.href = '@Url.Action("NearByAccountList", "NearBy")'
+            }
+            if ("@ViewBag.Title" == "DealList") {
+                getDeal("All", true);
+
+            }
+        }
+
+        //======================================Search category textbox==============================================
+        var getSearchCatUrl = '@Url.Action("GetSearchFromCategoryData", "Explore")';
+        $(function () {
+            $("[id$=txtSearchText]").catcomplete({
+                delay: 600,
+                source: function (request, response) {
+                    $.ajax({
+                        url: getSearchCatUrl,
+                        data: "{ 'Search_Text': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            //add category type & get all data into a single list
+                            for (var i = 0; i < data.Delivery.length; i++) {
+                                data.Delivery[i].category = "Delivery";
+                                data.Delivery[i].label = data.Delivery[i].Title;
+                            }
+                            for (var i = 0; i < data.Dispensary.length; i++) {
+                                data.Dispensary[i].category = "Dispensary";
+                                data.Dispensary[i].label = data.Dispensary[i].Title;
+                            }
+                            for (var i = 0; i < data.Doctor.length; i++) {
+                                data.Doctor[i].category = "Doctors";
+                                data.Doctor[i].label = data.Doctor[i].Title;
+                            }
+                            for (var i = 0; i < data.Brand.length; i++) {
+                                data.Brand[i].category = "Brands";
+                                data.Brand[i].label = data.Brand[i].Title;
+                            }
+                            var result = data.Brand;
+                            var finalList = result.concat(data.Dispensary, data.Delivery, data.Doctor);
+
+                            response($.map(finalList, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            //alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            //alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    if (i.item.category == "Brands") {
+                        var url = '@Html.Raw(@Url.Action("BrandDetail", "Explore"))' + '?BrandId=' + i.item.ID;
+                        window.location.href = url;
+                    }
+                    else {
+                        var Name = i.item.Title;
+                        var Id = i.item.ID;
+                        Name = Name.replace(/\s/g, '').replace(/[^a-zA-Z0-9]/g, '');
+                        var newParameter = Name  + "_" + Id;
+                        BusinessProfile(newParameter);
+                        //window.location.href = "/" + encodeURI(newParameter);
+                        @*var url = '@Html.Raw(@Url.Action("BusinessProfile", "Explore"))' + '?AccountID=' + i.item.ID;
+                        window.location.href = url;*@
+                    }
+                },
+                minLength: 1
+            });
+        });
+        $.widget("custom.catcomplete", $.ui.autocomplete, {
+            _create: function () {
+
+                this._super();
+                this.widget().menu("option", "items", "> :not(.ui-autocomplete-category)");
+            },
+            _renderMenu: function (ul, items) {
+                if ($(this.element).attr('id') == 'txtSearchText') {
+                    var that = this;
+                    currentCategory = "";
+                    $.each(items, function (index, item) {
+
+                        var li;
+                        if (item.category != currentCategory) {
+                            if (item.category == "Dispensary") {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>Storefronts</li>");
+                            }
+                            else if (item.category == "Delivery") {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>Delivery Services</li>");
+                            }
+                            else if (item.category == "Doctors") {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>Doctors</li>");
+                            }
+                            else if (item.category == "Brands") {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>Brands</li>");
+                            }
+                            currentCategory = item.category;
+                        }
+                        li = that._renderItemData(ul, item);
+
+                        if (item.category) {
+
+                            if (item.category == "Dispensary") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "'><img src='@imagePath1.ToString()/Content/images/storefront.svg' alt='Storefronts'/><b>" + item.label + "</b> <span>" + item.CityName + "</span></a></li>");
+                            }
+                            if (item.category == "Delivery") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "'><img src='@imagePath1.ToString()/Content/images/delivery-service.svg' alt='Delivery Services'/><b>" + item.label + "</b> <span>" + item.CityName + "</span></a></li>");
+                            }
+                            if (item.category == "Doctors") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "'><img src='@imagePath1.ToString()/Content/images/doctor.svg' alt='Doctors'/><b>" + item.label + "</b> <span>" + item.CityName + "</span></a></li>");
+                            }
+                            if (item.category == "Brands") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "'><img src='@imagePath1.ToString()/Content/images/doctor.svg' alt='Doctors'/><b>" + item.label + "</b> <span>" + item.CityName + "</span></a></li>");
+                            }
+                        }
+                    });
+
+                    if (ul.parent().attr('class') !== 'search-autosuggest') {
+                        ul.wrap("<div class='search-autosuggest'></div>");
+
+                    }
+                    $('.search-autosuggest').appendTo($('#txtSearchText').parent());
+
+                }
+                if ($(this.element).attr('id') == 'txtSearchPlaces') {
+                    var that = this;
+                    currentCategory = "";
+                    $.each(items, function (index, item) {
+                        var li;
+                        if (item.category != currentCategory) {
+                            if (item.category == "Regions") {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>" + "Regions " + "</li>");
+                            }
+                            else {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>" + "Locations " + "</li>");
+                            }
+                            currentCategory = item.category;
+                        }
+                        li = that._renderItemData(ul, item);
+
+                        if (item.category) {
+                            if (item.category == "Regions") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "' ><img src='@imagePath1.ToString()/Content/images/location-pin.png' alt='Storefronts'/><b>" + item.label + "</b></a></li>");
+                            }
+                            if (item.category == "Locations") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "' ><img src='@imagePath1.ToString()/Content/images/location-pin.png' alt='Delivery Services'/><b>" + item.label + "</b></a></li>");
+                            }
+                            li.attr("aria-label", item.category + " : " + item.label);
+                        }
+                    });
+                    if (ul.parent().attr('class') !== 'search-autosuggest') {
+                        ul.wrap("<div class='search-autosuggest'></div>");
+
+                    }
+                    $('.search-autosuggest').appendTo($('#txtSearchPlaces').parent());
+                }
+                if ($(this.element).attr('id') == 'txtSearch') {
+                    var that = this;
+                    currentCategory = "";
+                    $.each(items, function (index, item) {
+                        var li;
+                        if (item.category != currentCategory) {
+                            if (item.category == "Regions") {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>" + "Regions " + "</li>");
+                            }
+                            else {
+                                ul.append("<li style='font-weight:bold' class='ui-autocomplete-category'>" + "Locations " + "</li>");
+                            }
+                            currentCategory = item.category;
+                        }
+                        li = that._renderItemData(ul, item);
+
+                        if (item.category) {
+                            if (item.category == "Regions") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "' ><img src='@imagePath1.ToString()/Content/images/location-pin.png' alt='Storefronts'/><b>" + item.label + "</b></a></li>");
+                            }
+                            if (item.category == "Locations") {
+                                li.wrapInner("<li><a href='#' title='" + item.label + "' ><img src='@imagePath1.ToString()/Content/images/location-pin.png' alt='Delivery Services'/><b>" + item.label + "</b></a></li>");
+                            }
+                            li.attr("aria-label", item.category + " : " + item.label);
+                        }
+                    });
+                    if (ul.parent().attr('class') !== 'search-autosuggest') {
+                        ul.wrap("<div class='search-autosuggest'></div>");
+
+                    }
+                    $('.search-autosuggest').appendTo($('#txtSearch').parent().parent());
+                    $('.search-autosuggest').css('width', '400px');
+                }
+            }
+        });
+        //===========================================================================================================
+        //redirect to cart list
+        function CartDetail(userId)
+        {
+            //if cart items are zero then redirect to cart page is not required..
+            if(@itemCount.ToString()!='0')
+            {
+                location.href="@Url.Action("GoToCartList", "Order")";
+            }
+        }
+        var model;
+    </script>
+
+    <script>
+        window.intercomSettings = {
+            app_id: "ahrxvrin"
+        };
+    </script>
+    <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', intercomSettings); } else { var d = document; var i = function () { i.c(arguments) }; i.q = []; i.c = function (args) { i.q.push(args) }; w.Intercom = i; function l() { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/ahrxvrin'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); } if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })()</script>
+
+</body>
+</html>
