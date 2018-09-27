@@ -119,6 +119,10 @@
     </script>
     <!-- end Mixpanel -->
 
+    <!-- start Pixel -->
+    <script src="https://datplus.springserve.com/px/tag/359?"></script>
+    <!-- end Pixel -->
+
     @RenderSection("scripts", false)
     <title>Muncheez</title>
 </head>
@@ -136,8 +140,7 @@
                 </a>
                 <!-- Logo -->
                 <a href="~/Explore/ExploreList" title="Muncheez" class="logo">
-                    <img src="@imagePath1/Content/images/muncheez-logo.svg" alt="Muncheez" class="hidden-xs">
-                    <img src="@imagePath1/Content/images/icon-logo.png" alt="Muncheez" class="visible-xs">
+                    <img src="@imagePath1/Content/images/muncheez-logo.svg" alt="Muncheez">
                 </a>
                 <!-- End Logo -->
                 <!-- Main Navigation -->
@@ -178,6 +181,12 @@
                         <li id="lnk_Culture">
                             @Html.ActionLink("Culture", "CultureList", "Culture")
                         </li>
+                        <li id="lnk_Business">
+                            <a href="@Url.Action("Index","Business")" title="For Business">For Business</a>
+                        </li>
+                        <li id="lnk_Login">
+                            <a href="~/Login/Login" title="Sign Up" class="btn btn-primary">Sign In / Up</a>
+                        </li>
                     </ul>
 
                 </nav>
@@ -189,8 +198,7 @@
             @if (UserName == null || UserName == "")
             {
                 <div class="header-right">
-                    <a href="~/Login/Login" title="Sign In" class="btn btn-default">Sign In</a>
-                    <a href="~/Login/SignUp" title="Sign Up" class="btn btn-primary">Sign Up</a>
+                    <a href="~/Login/Login" title="Sign Up" class="btn btn-primary">Sign In / Up</a>
                     @*<a href="https://business.muncheez.com/business" target="_blank" title="For Business" class="btn btn-secondary">For Business</a>*@
                     <a href="@Url.Action("Index","Business")"  title="For Business" class="btn btn-secondary">For Business</a>
                     @*<button class="btn btn-secondary">For Business</button>*@
