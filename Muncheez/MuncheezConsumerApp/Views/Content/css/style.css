@@ -183,8 +183,8 @@ hr{border-top:1px solid #dddddd;}
 .content-heading a > img{position: absolute; right: 0; top: 5px;}
 .thumbnail{border:solid 1px #e0e0e0; padding:0;}
 .thumbnail-slider-outer{overflow: hidden;}
-.thumbnail-slider{margin:0 -15px;}
-.thumbnail-slider .flickity-slider > li{float: left; width: 22.22%; padding:5px 15px;}
+.thumbnail-slider{margin:0;}
+.thumbnail-slider .flickity-slider > li{float: left; width: 22.22%; padding:10px;}
 .thumbnail-slider.two-slide .flickity-slider > li{width: 40%;}
 .thumbnail-slider.three-slide .flickity-slider > li{width: 28.5%;}
 .thumbnail-slider .flickity-prev-next-button.previous{left: 20px;}
@@ -197,7 +197,7 @@ hr{border-top:1px solid #dddddd;}
 .thumbnail .thumbnail-img .hotel-logo{position: absolute; right: 10px; top: 10px; width: 40px; height: 40px; border-radius: 100%;}
 .thumbnail .thumbnail-img .discount{position: absolute; right: 10px; top: 10px; background: #a846a0; color: #fff; font-size: 11px; line-height: 15px; padding:3px 7px; border-radius: 4px;}
 .thumbnail .caption{padding:20px;}
-.thumbnail .caption h6{padding:0; min-height:46px; color: #a3a7ab;}
+.thumbnail .caption h6{padding:0; min-height:46px;}
 .thumbnail .caption h6.green-text{color: #00b398; min-height: inherit;}
 .thumbnail .caption h6.no-min-height{min-height: inherit;}
 .thumbnail .caption h6 .green-text{color: #00b398;}
@@ -1174,7 +1174,7 @@ hr{border-top:1px solid #dddddd;}
     .thumbnail.culture .thumbnail-img .main-img{height: 200px;}
     .deal-detail .main-img .image-container{height: 250px;}
 
-    .thumbnail-slider{margin:0 -5px;}
+    .thumbnail-slider{margin:0;}
 	.thumbnail-slider .flickity-slider > li{/*width: 40%;*/ width: 66.66%; padding:5px 5px;}
 	.thumbnail-slider.three-slide .flickity-slider > li{width: 66.66%;}
 	.thumbnail-slider .flickity-prev-next-button.previous{left: 10px;}
@@ -1717,3 +1717,202 @@ height: auto;
 }
 
 /* End of Nicolas' Stuff */
+
+/* Christian CSS Start */
+.header .header-right .btn.btn-primary {
+    border: solid 1px #00b398!important;
+}
+
+.banner-container {
+    max-width: 1080px;
+    padding-right: 600px;
+}
+
+    .banner-container h1 {
+        font-family: Circular-Medium;
+        font-size: 43px;
+        color: #ffffff;
+        letter-spacing: -0.45px;
+        line-height: 44px;
+        padding-bottom: 0;
+    }
+
+.download-btns a {
+    display: inline-block;
+    padding: 0 40px 0 0;
+}
+
+.download-btns-2 {
+    display: none;
+}
+
+#dataContainer.container{
+    overflow: hidden;
+}
+
+.thumbnail-slider-outer{
+    overflow: visible;
+}
+
+.flickity-viewport {
+    overflow: visible;
+}
+
+.thumbnail {
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+}
+
+    .thumbnail .caption h2 {
+        font-size: 22px;
+        line-height: 28px;
+        padding: 0;
+        height: 87px;
+        overflow: hidden;
+    }
+
+.flickity-button:disabled {
+    opacity: 0;
+}
+
+.jumbo-section{
+    padding: 75px 0px;
+}
+
+#lnk_Business, #lnk_Login {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .banner-container {
+        max-width: 930px;
+        padding-right: 410px;
+    }
+}
+
+@media (max-width: 991px) {
+    .banner-container {
+        max-width: 710px;
+        padding-right: 280px;
+    }
+    .toggle-sidebar {
+        left: auto;
+        right: 0;
+    }
+    .header {
+        padding: 16px;
+    }
+    .header-right{
+        display: none;
+    }
+    .main-navigation {
+        top: 71px;
+        width: 100%;
+        margin-left: -1020px;
+    }
+    .main-navigation .main-nav li {
+        font-size: 24px;
+        text-align: center;
+    }
+    .main-navigation .main-nav li a {
+         border-radius: 5px;
+         padding: 16px;
+         margin: 0 15px;
+    }
+    #lnk_Business, #lnk_Login {
+        display: none;
+    }
+    .header .form-inline {
+        background: transparent;
+    }
+    .header .form-inline .form-group {
+        padding: 4px 0;
+    }
+    .header .form-inline .form-group input.form-control {
+        border-radius: 5px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header {
+        padding: 10px;
+    }
+    .header-right{
+        display: none;
+    }
+    .logo {
+        margin: 4px;
+    }
+    .logo img {
+        width: 100%;
+        margin: 0;
+    }
+    .toggle-sidebar {
+        left: auto;
+        right: 0;
+    }
+    .main-navigation {
+        top: 62px;
+        width: 100%;
+        margin-left: -1000px;
+    }
+    .main-navigation .main-nav li {
+        font-size: 24px;
+        text-align: center;
+    }
+    .main-navigation .main-nav li a {
+        border-radius: 5px;
+        padding: 16px;
+        margin: 0 15px;
+    }
+    #lnk_Business, #lnk_Login {
+        display: block;
+    }
+    .header .form-inline {
+        background: transparent;
+    }
+    .header .form-inline .form-group {
+        padding: 4px 0;
+    }
+    .header .form-inline .form-group input.form-control {
+        border-radius: 5px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+    .banner{
+        height: 240px;
+    }
+    .banner-container {
+        padding: 0;
+    }
+        .banner-container h1 {
+            font-size: 31px;
+            line-height: 32px;
+            text-align: center;
+
+        }
+
+    .promptWrapper {
+        display: none;
+    }
+
+    .download-btns, .flickity-prev-next-button {
+        display: none;
+    }
+
+    .download-btns-2{
+        display: block;
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .download-btns-2 a img {
+        padding: 16px 1% 0;
+        width: 48%;
+    }
+}
+/* Christian CSS End */
